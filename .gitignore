@@ -1,0 +1,5 @@
+node_modules
+dist
+*.log
+test/_*.test.ts
+.claude/

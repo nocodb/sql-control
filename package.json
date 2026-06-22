@@ -1,0 +1,37 @@
+{
+  "name": "sql-control",
+  "version": "0.0.1",
+  "description": "SQL authorization layer for Postgres: parse, enforce permissions (visibility, field/record edit, RLS, no-DDL), rewrite SELECT * and inject RLS predicates, served as a wire-protocol proxy.",
+  "type": "module",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rolldown -c rolldown.config.mjs",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "vitest run test/proxy.pglite.e2e.test.ts test/proxy.realpg.e2e.test.ts test/proxy.realpg.lock.test.ts test/proxy.auth.e2e.test.ts test/driver-matrix.e2e.test.ts test/load.e2e.test.ts test/streaming.e2e.test.ts",
+    "probe": "node scripts/probe-parser.ts",
+    "test:fuzz": "FUZZ_ITERS=20000 vitest run test/fuzz.analyzer.test.ts test/fuzz.protocol.test.ts",
+    "test:soak": "SOAK=1 NODE_OPTIONS=--expose-gc vitest run test/proxy.soak.test.ts"
+  },
+  "dependencies": {
+    "pg-gateway": "^0.3.0-beta.4",
+    "pgsql-parser": "^17.9.15"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.3",
+    "@pgsql/types": "^17.6.2",
+    "@types/node": "^26.0.0",
+    "@types/pg": "^8.20.0",
+    "drizzle-orm": "^0.45.2",
+    "knex": "^3.2.10",
+    "pg": "^8.22.0",
+    "pg-query-stream": "^4.16.0",
+    "postgres": "^3.4.9",
+    "rolldown": "^1.1.2",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9"
+  }
+}
